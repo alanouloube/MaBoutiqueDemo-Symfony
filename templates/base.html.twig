@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/img/favicon/apple-touch-icon.png')}}">
+		<link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/img/favicon/favicon-32x32.png')}}">
+		<link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/img/favicon/favicon-16x16.png')}}">
+		<link rel="manifest" href="{{asset('assets/img/favicon/site.webmanifest')}}">
+		<link rel="mask-icon" href="{{asset('assets/img/favicon/safari-pinned-tab.svg')}}" color="#000000">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="theme-color" content="#ffffff">
+		<meta name="description" content="Ma Boutique Demo - 100% Made in Symfony">
+		<title>
+			{% block title %}Ma Boutique Demo - 100% Made in Symfony
+			{% endblock %}
+		</title>
+		<!-- Bootstrap core CSS -->
+		<link
+		href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
+		<!-- Main core CSS -->
+		<link
+		href="{{asset('assets/css/main.css')}}" rel="stylesheet">
+		<!-- JS -->
+		{% block javascript %}{% endblock %}
+	</head>
+	<body>
+		<header>
+			<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+				<a href="{{path('home')}}" class="navbar-brand">
+					<img src="{{asset('assets/img/logo.png')}}" alt="Logo Ma Boutique Demo" width="167" height="50">
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarCollapse">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item active">
+							<a class="nav-link" href="{{path('products')}}">Nos produits</a>
+						</li>
+						<li class="nav-item active">
+							<a class="nav-link" href="{{path('story')}}">Qui sommes-nous ?</a>
+						</li>
+						<li class="nav-item active">
+							<a class="nav-link" href="{{path('contact')}}">Contact</a>
+						</li>
+					</ul>
+					<div class="navbar-item-custom">
+						{% if app.user %}
+							<a href="{{path('account')}}">Bonjour
+								{{app.user.firstname}}
+							</a>
+							|
+							<a href="{{path('app_logout')}}">Déconnexion</a>
+						{% else %}
+							<a href="{{path('app_login')}}">Connexion</a>
+							|
+							<a href="{{path('register')}}">Inscription</a>
+						{% endif %}
+					</div>
+					<a href="{{path('cart')}}">
+						<img class="cart-icon" src="{{ asset('assets/img/shopping-cart.png')}}" alt="Voir mon panier">
+					</a>
+				</div>
+			</nav>
+		</header>
+		<main role="main" class="overhome">
+			{% if block('carousel') is defined %}
+				<div id="myCarousel" class="carousel slide" data-ride="carousel">
+					<ol class="carousel-indicators">
+						{% for key,header in headers %}
+							<li data-target="#myCarousel" data-slide-to="{{ key }}" {% if key == 0 %} class="active" {% endif %}></li>
+						{% endfor %}
+					</ol>
+					<div class="carousel-inner">
+						{% for key,header in headers %}
+							<div class="carousel-item {% if key == 0 %}active{% endif %}" style="background: url('/uploads/{{ header.illustration }}');background-size:cover;">
+								<div class="container">
+									<div class="carousel-caption text-left">
+										<h1>{{ header.title }}</h1>
+										<p>{{ header.content }}</p>
+										<p>
+											<a class="btn btn-lg btn-dark" href="{{ header.btnUrl }}" role="button">{{ header.btnTitle }}</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+					<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a>
+					<a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
+			{% endif %}
+			<div class="container marketing {% if block('carousel') is not defined %} mt-5{% endif %} "> {% block content %}{% endblock %}
+				</div>
+				<!-- ======= Footer Section ======= -->
+				<div class="container">
+					<footer class="pt-5">
+						<div class="d-flex justify-content-between py-4 my-4 border-top">
+							<p class="col-md-4 mb-0 text-muted">© 2022 Ma Boutique Demo</p>
+							<a href="{{path('home')}}" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+								<img src="{{asset('assets/img/logoB.png')}}" alt="Logo Ma Boutique Demo" width="167" height="50">
+							</a>
+							<ul class="nav col-md-4 justify-content-end">
+								<li class="nav-item">
+									<a href="{{path('home')}}" class="nav-link px-2 text-muted">Made with &#10084;&#65039; &nbsp;in Montpellier</a>
+								</li>
+							</ul>
+						</div>
+					</footer>
+				</main>
+				<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+				<script src="{{asset('assets/js/bootstrap.bundle.js')}}"></script>
+			</body>
+			{% block script %}{% endblock %}
+		</body>
+	</html>

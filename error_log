@@ -1,0 +1,4 @@
+[29-Jan-2022 12:59:38 Europe/Paris] 2022-01-29T12:59:38+01:00 [critical] Uncaught Error: Class "Symfony\Bundle\WebProfilerBundle\WebProfilerBundle" not found
+[29-Jan-2022 17:24:33 Europe/Paris] 2022-01-29T17:24:33+01:00 [critical] Uncaught Error: Class "Symfony\Bundle\WebProfilerBundle\WebProfilerBundle" not found
+[29-Jan-2022 17:27:39 Europe/Paris] 2022-01-29T17:27:39+01:00 [critical] Uncaught Error: Class "Symfony\Bundle\WebProfilerBundle\WebProfilerBundle" not found
+[29-Jan-2022 17:28:00 Europe/Paris] 2022-01-29T17:28:00+01:00 [critical] Uncaught Error: Class "Symfony\Bundle\WebProfilerBundle\WebProfilerBundle" not found

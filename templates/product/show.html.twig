@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{product.name}}
+	- Ma Boutique Demo
+{% endblock %}
+
+{% block content %}
+	<div>
+		<a href="{{path('home')}}" class="text-dark">
+			<b>Accueil</b>
+		</a>
+		/
+		<a href="{{path('products')}}" class="text-dark">
+			<b>Nos produits</b>
+		</a>
+		/
+		<span class="text-secondary">{{product.name}}</span>
+	</div>
+	<hr>
+	<div class="row pt-5">
+		<div class="col-md-5">
+			<img class="img-fluid" src="/uploads/{{product.illustration}}" alt="{{product.name}}">
+		</div>
+		<div class="col-md-7 my-auto">
+			<h3 class="display-4 font-weight-bold">{{product.name}}</h3>
+			<span class="product-page-price font-weight-bold">{{(product.price / 100)|number_format(2, ',', '.')}}
+				€</span>
+			<hr>
+			<p class="text-muted">{{product.subtitle}}</p>
+			<div class="d-flex justify-content-center my-5">
+				<a href="{{path('add_to_cart', {'id' : product.id})}}" class="btn btn-dark">Ajouter au panier</a>
+			</div>
+			<div class="d-flex justify-content-center">
+				<img src="{{asset('assets/img/secure-payement.jpeg')}}" width="85%" class="img-fluid" alt="Paiement Sécurisé">
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div class="accordion" id="accordionProduct">
+		<div class="card">
+			<div class="card-header bg-black" id="headingOne">
+				<h2 class="mb-0">
+					<button class="btn btn-dark btn-block text-left accordeon-product" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+						Description
+					</button>
+				</h2>
+			</div>
+
+			<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionProduct">
+				<div class="card-body">
+					{{product.description}}
+				</div>
+			</div>
+		</div>
+		<div class="card">
+			<div class="card-header bg-black" id="headingTwo">
+				<h2 class="mb-0">
+					<button class="btn btn-dark btn-block text-left collapsed accordeon-product" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+						Informations Complémentaires
+					</button>
+				</h2>
+			</div>
+			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionProduct">
+				<div class="card-body">
+					{{product.subtitle}}
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<hr>
+	<h3 class="h3">Nos meilleures ventes</h3>
+	<p class="text-muted">Découvrez les articles les plus vendus.</p>
+	<div class="row">
+		{% for product in products %}
+			<div class="col-md-3">
+				{% include 'product/single_product.html.twig' %}
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}
